@@ -2,12 +2,98 @@ DeepXDE
 =======
 
 
-To do. Explain the theory for inverse problems, and add references.
+Phisics Informed Neural Networks (PINNs) vs Finite Element Method (FEM)
+-----------------------------------------------------------------------
+
+FEM is a commonly used method for **numerically** solving differential equiations in engeneering and mathematical modeling. This method is very popular for solving problems in traditional fields like heat transfer, fluid flow, electromagnetic potential and even FEM based programs to run simulations. FEM is based on discretization in the given space dimensions, so it creates a discrete **mesh** of the continuous to compute approximations of the values in the nods of the mesh solving a system of equations via **linear** algebra.
+
+PINNS on the other hand give a more robust solution based on a non-linear function represented by a neural network instead of solving the matrix of equations in FEM. The parameters are no longer linked to points values in the space as they are replaced with the weights and biases of the loss function wich is a nonlinear and nonconvex function respect to its parameter theta. Going into the training we have our biggest advantage so far as we can feed our NN with scattered points because this model does not require a mesh for this operation. Lastly our neural network can manage solving its loss function through multiple dimensions because each layer of the neuron is differentiable, so it is the loss function, then we can optimize it via a gradient based algorithm using the backpropagation algorithm.
+
+Therefore, there are some clear advantages in the use of PINNS because its compatibility to compute a multidimensional solution with independence of the points in the training data. 
+
+**Theory Behind Inverse Problems** (To do. Explain the theory for inverse problems, and add references.)
+
+
+
+**Neural Networks**
+
+In simple terms, a neural network is a function with the particular ability to learn to predict complex patterns using
+data.
+
+.. image:: ~Image/NeuralNetworkbyAndrewNg.png
+(by Andrew Ng, Machine Learning Coursera)
+
+
+.. image:: ~Image/RedNeuronal.png
+
+As shown in the figure, the layer of neurons is represented with a non-linear transformation. In each layer shown in Figure 1, the network uses the same activation function (non-linear transformation in Figure 2).
+
+There are many activation functions
+
+On this occasion, we will use this type of architecture to approach the nature of vector and scalar fields applied to
+physics.
+
+To optimize the model we need data. Different points in space-time with associated vectors belonging to our vector or scalar field.
+
+First, we will use the maximum likelihood method to define the optimization problem, which under a series of assumptions consists of find the parameters of the network that minimizes a type of mean square error (the loss function) between the predictions and the values observed in the database.
+
+Second, we will use the gradient descent algorithm to find the network parameters that best fit our predictions.
+
+To complete with the previous task, we will use the backpropagation algorithm to calculate in each "epoch" the evaluation in the gradient function of the cost function for a particular network parameters (A concatenation of arrays with real numbers).
+
+Then with the gradient descent it varies its parameters until it reaches the optimal solution.
+
+These videos explain in a more intuitive way how neural networks work.
+
+What is a neural network?
+https://www.youtube.com/watch?v=n1l-9lIMW7E&list=PLpFsSf5Dm-pd5d3rjNtIXUHT-v7bdaEIe&index=2
+Supervised Learning with a Neural Network
+https://www.youtube.com/watch?v=BYGpKPY9pO0
+
+Mathematic Details About Deep Neural Networks applied to Physics
+https://www.overleaf.com/5389572137znnjcpqctqxj
+
+Installation 
+------------
+
+
+**Requirements**
+
+To run **DeepXDE** on your local machine or a cluster, you need to install at least one backend (for example, **TensorFlow**).
+Install **TensorFlow** using the command line: ::
+
+$ pip install tensorflow  #Using pip as a installer
+$ conda install tensorflow #Using conda as a installer
+
+If you are using GPUs, you can install ``tensorflow-gpu`` rather than ``tensorflow``.
+The next step is to **install the DeepXDE library** with one of these commands: ::
+
+$ pip install deepxde #Using pip as installer
+$ conda install deepxde #Using conda as installer
+
+Once TensorFlow and DeepXDE were installed, you can check if the installation was successful running a IPython or Jupyter session and importing the library on it.
+
+
+
+**How to run DeepXDE examples**
+
+The first step is to clone the library repository in your computer cluster using git: ::
+
+$ git clone https://github.com/lululxvi/deepxde.git
+
+Second step, change Python PATH to the library directory: ::
+
+$ export PYTHONPATH=$PYTHONPATH:/root/shared/deepxde
+
+One time the repository was clone and the PATH was updated, you are ready to run some library examples that are located in the examples directory.
+
+
+
 
 Solving a Time-independent PDE: 
 -------------------------------
-This mathematical example is commonly known, 
-but for the original solution in Python you can go to the 
+
+For the original solution you can go to the 
 `DeepXDE documentation <https://deepxde.readthedocs.io/en/latest/demos/pinn_forward/helmholtz.2d.dirichlet.html>`_.
 
 Given a wavenumber: :math:`k_{0}=2\pi n` with :math:`n=2`.

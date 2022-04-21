@@ -20,7 +20,7 @@ This entire page is written with the RST syntax. In the landing page, you should
 
 
 
-There are a few special characters used to format text. The special character ``*`` is used to defined bold and italic text as shown in the table below. The backquote character ````` is another special character used to create links to internal or external web pages as you will see in section `Internal and External Links`_.
+There are a few special characters used to format text. The special character ``*`` is used to defined bold and italic text as shown in the table below. The backquote character ````` is another special character used to create links to internal or external web pages as you will see in section `Internal and External Links`.
 
 =========== ================================== ==============================
 usage          syntax                           HTML rendering
@@ -48,12 +48,7 @@ In order to write a title, you can either underline it or under and overline it.
     **********************
     and so on
 
-
-
-
-
 Two rules: 
-
   * If under and overline are used, their length must be identical
   * The length of the underline must be at least as long as the title itself
 

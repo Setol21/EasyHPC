@@ -1,7 +1,7 @@
 GitHub
 ======
 
-How to collaborate to a repository such as `EasyHPC <https://github.com/pescap/EasyHPC>`_? If you want to send Pull Requests to open source directories, you have to follow these steps:
+How to collaborate to a repository such as `EasyHPC <https://github.com/pescap/EasyHPC>`_? If you want to send Pull Requests to open source repositories, you are encouraged to follow these steps:
 
 Create an issue
 ---------------
@@ -9,22 +9,43 @@ To propose changes or enhancements to the code, it is preferable to use the Issu
 
 - Go to the `issues <https://github.com/pescap/EasyHPC/issues>`_ section of the GitHub repository.
 - Click on ``New issue`` button.
-- Write a **title** for the issue and in the **write** section describe it.
-- Add **labels** and **assignees**, you can do this in the right panel when creating an issue.
+- Define a **title** for the issue fill in the **write** section.
+- Add **labels** and **assignees** (right panel).
 
-With this, you successfully added a new issue that every other collaborator can see and comment.
+With this, you successfully created a new issue that every other collaborator can see and comment.
 
 
 Fork the repository to your GitHub account
 ------------------------------------------
 
-- Go to the EasyHPC GitHub directory `(click here) <https://github.com/pescap/EasyHPC>`_.
+This step creates your own remote copy of the repo you want to work on. This way you can modify the code, create your own branches and keep the main code of the main repo clean and safe before merging your changes.
+
+- Go to the EasyHPC GitHub directory (`click here <https://github.com/pescap/EasyHPC>`_).
 - Click on the ``Fork`` button on the top-right hand corner of the window.
 - Choose where you want to fork EasyHPC.
-  
-Work locally on the forked repository
--------------------------------------
-Now that you have forked the repository, you will clone it locally on your computer.
+
+
+SSH key configuration
+----------------------
+
+You can log into GitHub using the Secure Shell (SSH) Protocol.
+
+If you don't have an ssh key, use the following code to create one.
+	 $ ssh-keygen
+
+Now, you can see your ssh key by running: 
+	 $ cat ~/.ssh/id_rsa.pb
+
+Add the ssh key to your profile.
+Copy and paste on Github>Settings>SSH and GPG Keys> New SSH key
+
+*Workflow*
+----------
+The next series of steps will help you understand the git workflow and how to either update your repo or commiting your changes to then push to your forked repo and send pull requests to add your contributions.
+
+Cloning your forked repository
+------------------------------
+Now that you have forked the repository, you will clone it locally on your computer to now generate a copy of it into your disk.
 
 - Go to the forked GitHub directory webpage. It should be something like: ::
 
@@ -32,7 +53,7 @@ Now that you have forked the repository, you will clone it locally on your compu
 
 - Click on the ``clone`` button and copy the directory URL.
   
-- In your terminal type (This step just needs to be done when you don´t have the local repo of the forked repository)::
+- In your terminal type (This step just needs to be done when you don't have the local repo of the forked repository)::
 
 	$ git clone directory_url
 
@@ -46,10 +67,10 @@ Now that you have forked the repository, you will clone it locally on your compu
 
 Now, you are ready to work on this branch, to make all the changes that you want to the code.  
 
-How to keep your local repository up to date
---------------------------------------------
+How to keep your local repository up to date or git pull
+--------------------------------------------------------
 
-Configure a remote:
+Once you're done with the ssh key configuration, let's set up a remote:
    
 1. List the current remote repository for your fork: ::
 
@@ -90,23 +111,35 @@ $ git pull upstream
 
 **Warning**: You will lose your work in the working space if you pull any repository before you commit into the local repo.
 
-Push to the main/forked repository
-----------------------------------	
+Commit and push to the main/forked repository
+---------------------------------------------	
 
 Remember that if you added files to your directory in the working space, those files must be added before commiting: ::
 
 $ git add <file_name>
 
-Once your changes are done, you can commit and push them to the remote branch ``neo``: ::
+Once your changes are done, you can commit and push them to the remote branch ``neo``, note that when you git commit you're saving those changes in your local repo and then git push uploads your local repo into either your origin(highly recomended) or upstream remote repo: ::
 
-$ git commit -a -m "message about what you added"
-$ git push origin neo 
+	$ git commit -a -m "message about what you added"
+	$ git push origin neo 
+
+Notice that you can link the pull request to an issue using a keyword (see `here <https://docs.github.com/es/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue>`_).
+
+For example, if you commit solves issue number `#90`, you can run::
+
+	$ git commit -a -m "fixes #90"
+	$ git push origin neo
+
+This will automatically close issue `#90`.
+
+Pull requests for merging your changes into the original repo
+-------------------------------------------------------------
 
 If you want to merge your changes to the original ``EasyHPC``, go back to your forked page, e.g.: ::
 
  https://github.com/your_username/EasyHPC/
 
-Check compatibility and propose a Pull Request. 
+Check compatibility and propose a Pull Request. You should see your pushes on the github website of your fork and it will suggest you to send a pull request 
 
 **Note**: Before you submit a pull request: 
 
@@ -118,19 +151,22 @@ Check compatibility and propose a Pull Request.
 
 You're ready to collaborate to any Open-Source repository on GitHub!
 
+*Extra help*
+------------
+
 How to manually link an issue with a pull request
 -------------------------------------------------
 
 1. On the upstream GitHub repository click on ``Pull requests``.
 2. Click on the pull request that you would like to link to an issue.
-3. In the right panel, ``Development`` section click |:gear:|.
+3. In the right panel, ``Development`` section click on the gear emoji.
 4. Select the issue you want to link.
 
 **Note**: You can do this every time you are about to present a pull request to the upstream repository.
 
 Milestones
 ----------
-To better manage/see due dates, completion percentage, open/closed issues and pull requests associated with a specific part/characteristic of the project. 
+To manage better due dates, completion percentage, open/closed issues and pull requests associated with a specific part/characteristic of the project:
 
 1. Go to the main page of the original repository.
 2. Click on ``Issues`` or ``Pull requests``.
@@ -139,3 +175,34 @@ To better manage/see due dates, completion percentage, open/closed issues and pu
 5. Type the milestone's title and description.
 
 **Note**: When you delete milestones, issues and pull requests are not affected.
+
+GitHub Actions
+--------------
+`GitHub Actions <https://github.com/features/actions>`_ allows to automate workflows. They can be accessed via the ``Actions`` in the home GitHub repository (web).
+
+Workflows are stored in `.github/workflow <https://github.com/pescap/EasyHPC/tree/main/.github/workflows>`_. A simple workflow was created in `issues.yml <https://github.com/pescap/EasyHPC/blob/main/.github/workflows/issues.yml>`_. It follows the general structure for workflows: ::
+
+	name: Close inactive issues #name for the workflow
+	on: #when it is runned. It can be on schedule or via a manual trigger
+	  schedule:
+	    - cron: "30 1 * * *" #here, it runs every day
+
+	jobs: # each workflow in subdivised into jobs
+	  close-issues: #here, one job called close-issues
+	    runs-on: ubuntu-latest #on which machine it is runned
+	    permissions: #the permissiones for the workflow
+	      issues: write
+	      pull-requests: write
+	    steps:
+	      - uses: actions/stale@v3
+	        with:
+	          days-before-issue-stale: 7
+	          days-before-issue-close: 7
+	          stale-issue-label: "stale"
+	          stale-issue-message: "This issue is stale because it has been open for 7 days with no activity."
+	          close-issue-message: "This issue was closed because it has been inactive for 7 days since being marked as stale."
+	          days-before-pr-stale: -1
+	          days-before-pr-close: -1
+	          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+This workflow stales inactive issues after 7 days, and closes them 7 days later. The code is issued from `this link <https://docs.github.com/en/github-ae@latest/actions/managing-issues-and-pull-requests/closing-inactive-issues>`_.
